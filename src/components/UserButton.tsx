@@ -1,7 +1,13 @@
 "use client";
 
+import { logout } from "@/app/(auth)/action";
 import { useSession } from "@/app/(main)/SessionProvider";
-import React from "react";
+import { cn } from "@/lib/utils";
+import { useQueryClient } from "@tanstack/react-query";
+import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import UserAvatar from "./UserAvatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,12 +20,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import UserAvatar from "./UserAvatar";
-import Link from "next/link";
-import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
-import { logout } from "@/app/(auth)/action";
-import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 
 interface UserButtonProps {
   className?: string;
@@ -29,6 +29,8 @@ const UserButton = ({ className }: UserButtonProps) => {
   const { user } = useSession();
 
   const { theme, setTheme } = useTheme();
+
+  const queryClient = useQueryClient();
 
   return (
     <DropdownMenu>
@@ -74,6 +76,7 @@ const UserButton = ({ className }: UserButtonProps) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => {
+            queryClient.clear();
             logout();
           }}
         >

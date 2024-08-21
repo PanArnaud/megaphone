@@ -1,12 +1,18 @@
+import TrendsSidebar from "@/components/TrendsSidebar";
+import Post from "@/components/posts/Post";
 import PostEditor from "@/components/posts/editor/PostEditor";
-import Image from "next/image";
+import prisma from "@/lib/prisma";
+import { postDataInclude } from "@/lib/types";
+import ForYouFeed from "./ForYouFeed";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main className="bg-ref-5>0 h-[200vh] w-full">
-      <div className="w-full">
+    <main className="w-full min-w-0 flex gap-5">
+      <div className="w-full min-w-0 space-y-5">
         <PostEditor />
+        <ForYouFeed />
       </div>
+      <TrendsSidebar />
     </main>
   );
 }
