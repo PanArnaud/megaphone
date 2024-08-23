@@ -1,6 +1,7 @@
 "use client";
 
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
+import DeletePostDialog from "@/components/posts/DeletePostDialog";
 import Post from "@/components/posts/Post";
 import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton";
 import { Button } from "@/components/ui/button";
@@ -37,9 +38,11 @@ const ForYouFeed = () => {
   }
 
   if (status === "success" && !posts.length && !hasNextPage) {
-    return <p className="text-center text-muted-foreground">
-      No one has posted anything yet.
-    </p>
+    return (
+      <p className="text-center text-muted-foreground">
+        No one has posted anything yet.
+      </p>
+    );
   }
 
   if (status === "error") {
